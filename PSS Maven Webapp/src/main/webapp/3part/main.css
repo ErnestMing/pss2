@@ -1,0 +1,735 @@
+/**
+ * 展现端css reset
+ *
+ * @author shaobo(renshaobo@baidu.com)
+ */
+
+#qiao-wrap,
+#qiao-wrap ins,
+#qiao-wrap input,
+#qiao-wrap textarea,
+#qiao-wrap a,
+#qiao-fixed-wrap,
+#qiao-fixed-wrap ins,
+#qiao-fixed-wrap a,
+#BDBridgeFixedWrap,
+#BDBridgeFixedWrap ins,
+#BDBridgeFixedWrap a,
+#BD_QIAO_WEBIM_LITE_WRAP a {
+    /**
+     * width: 100%;
+     */
+    width: auto;
+    height: auto;
+
+    /**
+     * margin: 0 auto;
+     */
+    margin: 0;
+    padding: 0;
+
+    background-color: transparent;
+    background-position: 0% 0%; 
+    background-size: auto; 
+    background-repeat: repeat;
+    background-origin: padding-box; 
+    background-clip: border-box; 
+    background-attachment: scroll; 
+    background-image: none;
+
+    border: none;
+    outline: invert none medium;
+
+    color: #000;
+    direction: ltr;
+    letter-spacing: normal;
+    line-height: normal;
+    text-align: left;
+    text-decoration: none;
+    text-indent: 0;
+    text-transform: none;
+    white-space: normal;
+    word-spacing: normal;
+
+    font-size: 12px;
+    font-family: Tahoma,"宋体",Helvetica,sans-serif;
+    font-size-adjust: none;
+    font-stretch: normal;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: inherit;
+
+    visibility: inherit;
+    overflow:  visible;
+
+    list-style: none;
+
+    float: none;
+    /**
+     * clear: both;
+     */
+    clear: none;
+
+    position: static;
+    top: auto;
+    left: auto;
+
+    vertical-align: baseline;
+
+    -moz-box-sizing: content-box;  
+    -webkit-box-sizing: content-box; 
+    -o-box-sizing: content-box; 
+    -ms-box-sizing: content-box; 
+    box-sizing: content-box;
+}
+
+#qiao-wrap ins,
+#qiao-fixed-wrap ins,
+#BDBridgeFixedWrap ins {
+    display: block;
+}
+
+#qiao-wrap a,
+#qiao-fixed-wrap a,
+#BDBridgeFixedWrap a,
+#BD_QIAO_WEBIM_LITE_WRAP a {
+    display: inline;
+}
+
+#qiao-wrap .qiao-mask-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    _filter: alpha(opacity = 0);
+}
+
+#qiao-flash-wrap {
+    background-color: #fff;
+    width: 1px;
+    height: 1px;
+    font-size: 0px;
+    line-height: 0px;
+}
+
+
+
+
+
+
+
+
+
+
+/*解析背景-title*/
+
+/*close hover样式*/
+
+ins#qiao-icon-wrap {
+        
+    visibility:visible !important;
+    z-index: 2147483647;
+}
+
+/* icon head */
+#qiao-icon-wrap .qiao-icon-head {
+    position: relative;
+                width: 147px;
+        height: 70px;
+                    background: url(http://qiao.baidu.com/v3/res/iconbg/01.jpg) no-repeat;
+            
+    left: 0px;
+    overflow: hidden;
+    display: block;
+    z-index: 100;
+}
+
+/* icon head offline*/
+#qiao-icon-wrap .qiao-icon-head-offline {
+        
+}
+
+/* icon head title */
+#qiao-icon-wrap .qiao-icon-title {
+                background: url(http://qiao.baidu.com/v3/res/iconhead/04.png) no-repeat;
+        _background: none;
+        _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://qiao.baidu.com/v3/res/iconhead/04.png");
+    
+    position: absolute;
+    bottom: 10px;
+    width: 90px;
+    height: 30px;
+    text-indent: -999px;
+    overflow: hidden;
+}
+
+/* icon head transit */
+#qiao-icon-wrap .qiao-icon-gradient {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+                                filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#003290cd',endColorstr='#FF3290cd' );background: -webkit-gradient(linear, left top, left bottom,from(rgba(50,144,205,0)), to(#3290cd));background: -webkit-linear-gradient(top, rgba(50,144,205,0), #3290cd);background: -moz-linear-gradient(top, rgba(50,144,205,0), #3290cd);background: -o-linear-gradient(top, rgba(50,144,205,0), #3290cd);background: linear-gradient(to bottom, rgba(50,144,205,0), #3290cd);
+            
+}
+
+/* icon body */
+#qiao-icon-wrap .qiao-icon-body {
+    position: relative;
+    /* left = 25 - config.x > 0 ? 25 - config.w : 0 ;
+        left + config.x
+     */
+    /* 炫彩型 来自 config.dw*/
+    overflow: hidden;
+    padding-bottom: 10px;
+                        width: 147px;
+                    background: #3290cd;
+            
+    }
+
+/* icon group && icon user group */
+#qiao-icon-wrap .qiao-icon-group {
+    /* color: #bd4b13; */
+    font-weight: bold;
+    margin: 5px;
+    line-height: 1.5;
+    display: block;
+                color: #bd4b13;
+    
+}
+
+#qiao-icon-wrap .qiao-icon-user-group {
+    /* color: #bd4b13; */
+    font-weight: bold;
+    margin: 5px;
+    line-height: 1.5;
+    display: block;
+                color: #bd4b13;
+    
+}
+
+/* icon group */
+#qiao-icon-wrap .qiao-icon-group {
+    padding: 3px 3px 3px 7px;
+                                            background: #f7bd84;
+                        
+    overflow: hidden;
+    white-space: nowrap;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#qiao-icon-wrap .qiao-icon-group a {
+    display: block;
+    line-height: 1.5;
+    padding-left: 20px;
+    _zoom: 1;
+    background: url(http://qiao.baidu.com/v3//img/front/icon.png) -420px -20px;
+                color: #bd4b13;
+    
+}
+
+#qiao-icon-wrap .qiao-icon-group a:hover {
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+}
+
+#qiao-icon-wrap .qiao-icon-group a.qiao-icon-group-online {
+    background-position: -420px 0;
+}
+
+
+/* icon user */
+#qiao-icon-wrap .qiao-icon-user {
+    display: block;
+    margin: 0 5px 0 15px;
+    line-height: 1.5;
+    padding-left: 15px;
+    overflow: hidden;
+    border: 1px solid transparent;
+    _border: none;
+    _margin-left: 16px;
+    _padding: 1px 1px 1px 15px;
+    white-space: nowrap;
+    background: url(http://qiao.baidu.com/v3//img/front/icon.png) -420px -56px;
+                color: #bd4b13;
+    
+}
+
+/* icon user online */
+#qiao-icon-wrap .qiao-icon-user-online {
+    background-position: -420px -36px;
+}
+
+/* icon user hover */
+#qiao-icon-wrap .qiao-icon-user:hover {
+    filter:alpha(opacity=80);
+    -moz-opacity:0.5;
+    -khtml-opacity:0.5;
+    opacity:0.5;
+    border: 1px solid #fff;
+    _margin-left: 15px;
+    _padding: 0px 0px 0px 15px;
+}
+
+/* icon close */
+#qiao-icon-wrap .qiao-icon-close {
+    position: absolute;
+    width:25px;height:66px;top:50%;margin-top:-33px;left:-25px;background:url(http://qiao.baidu.com/v3/img/front/icon_close.png) -80px 0 no-repeat;
+}
+
+/* icon close hover */
+#qiao-icon-wrap .qiao-icon-close:hover {
+                background-position: url(http://qiao.baidu.com/v3/img/front/icon_close.png) -120px 0 no-repeat;;
+    
+}
+
+/* icon min */
+#qiao-icon-wrap .qiao-icon-min {
+    width: 25px;
+    height: 68px;
+    display: none;
+                width:25px;height:66px;background:url(http://qiao.baidu.com/v3/img/front/icon_close.png) 0 0 no-repeat
+    
+}
+
+#qiao-icon-wrap .qiao-icon-min:hover {
+            background-position: url(http://qiao.baidu.com/v3/img/front/icon_close.png) -40px 0 no-repeat;
+    }
+
+/* icon min change */
+#qiao-icon-wrap.qiao-icon-wrap-min .qiao-icon-head,
+#qiao-icon-wrap.qiao-icon-wrap-min .qiao-icon-body,
+#qiao-icon-wrap.qiao-icon-wrap-min .qiao-icon-close {
+    display: none;
+}
+
+#qiao-icon-wrap.qiao-icon-wrap-min .qiao-icon-min {
+    display: block;
+}
+ins#qiao-invite-wrap {
+    visibility: visible !important;
+    position: fixed;
+    _position: absolute;
+
+    /* 容器大小 */
+    width:310px;height:144px;
+
+    /* 容器位置 */
+    top:50%;left: 50%;margin:-72px 0 0 -155px;
+
+    /* 背景 */
+    background:url(http://qiao.baidu.com/v3/res/invitebg/01.jpg);
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    z-index: 2147483647;
+}
+
+#qiao-invite-wrap .qiao-invite-decoration {
+        position: absolute;
+    top: 5px;
+    left: 5px;
+        width: 98px;
+    height: 128px;
+        border: 2px solid #FFF;
+
+        background: url(http://qiao.baidu.com/v3/res/invitehead/01_big.jpg) 0 0;
+    }
+
+#qiao-invite-wrap .qiao-invite-text {
+        position: absolute;
+    top: 50%;
+    left: 115px;
+    padding-right: 18px;
+    
+    /* 使用富文本，去掉*/
+    /* 字体设置 
+    font-size: 12px;
+    color: #333;*/
+    /* 字体最好用英文 
+    font-family: SimSun;
+    line-height: 1.5;*/
+}
+
+#qiao-invite-wrap .qiao-invite-close {
+    
+    position: absolute;
+    width: 10px;height: 10px;
+    top: 5px;right: 5px;
+        z-index: 100;
+    cursor: pointer;
+    background: url(http://qiao.baidu.com/v3/img/matrix/btn.png) -19px -63px;
+}
+
+#qiao-invite-wrap .qiao-invite-reject {
+    
+    position: absolute;
+    width: 80px;height: 25px;
+    bottom: 5px;right: 90px;
+    
+    line-height: 25px;
+    color: #666;
+    text-align: center;
+
+    
+    border: 1px solid #CCC;
+    cursor: pointer;
+
+    background: #EAEAEA;
+    background: -moz-linear-gradient(top, #F3F3F3, #E0E0E0);
+    background: -webkit-gradient(linear, 0 0, 0, 100%, from(#F3F3F3), to(#E0E0E0));
+}
+
+#qiao-invite-wrap .qiao-invite-accept {
+    
+    position: absolute;
+    bottom: 5px;right: 5px;
+    width: 80px;height: 25px;
+
+    
+    line-height: 25px;
+    color: #000;
+    text-align: center;
+
+    border: 1px solid #7292B3;
+    cursor: pointer;
+
+    background: #206CD3;
+    /* 使用纯色 
+    background: -moz-linear-gradient(top, #A7C6E5, #7FB0DF);
+    background: -webkit-gradient(linear, 0 0, 0, 100%, from(#A7C6E5), to(#7FB0DF));
+    */
+}
+
+#qiao-invite-wrap .qiao-invite-form {
+    display:none;
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    
+    width: 100%;
+    padding: 5px 0;
+    overflow: hidden;
+
+    background: #D6E3F0;
+
+    -webkit-border-bottom-left-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#qiao-invite-wrap .qiao-invite-form-inner {
+    position: relative;
+    padding-left: 5px;
+    padding-right: 60px;
+    overflow: hidden;
+}
+
+#qiao-invite-wrap .qiao-invite-input {
+    display: block;
+    
+    width: 100%;
+    height: 32px;
+    padding: 2px;
+    outline: none;
+
+    border: 1px solid #CCC;
+    background: #FFF;
+}
+
+#qiao-invite-wrap .qiao-invite-send {
+    position: absolute;
+    top: 0;
+    right: 5px;
+    width: 40px;
+    height: 36px;
+    line-height: 36px;
+    background: #B0CBE5;
+    border: 1px solid #6095C6;
+    color: #000;
+    text-align: center;
+    cursor: pointer;
+}
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table;
+}
+.clearfix:after{
+    clear: both;
+}
+.clearfix{
+    *zoom: 1;/*ie6,7*/
+}
+
+
+/* TODO: 设置变量 $wrapPosition  */
+ins#qiao-mess-wrap {
+    visibility:visible !important;
+    position: fixed;
+    _position: absolute;
+    bottom: 0;
+    z-index: 2147483647;
+    left: 0;;
+}
+
+#qiao-mess-wrap .qiao-mess-star {
+    color: red;
+    display: inline
+}
+
+.qiao-mess-wrap form,
+.qiao-mess-wrap input {
+    line-height: normal;
+    font-size: 12px;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    outline: none;
+    font-family: Arial;
+    text-align: left;
+    overflow: visible;
+    position: static;
+    width: auto;
+    height: auto;
+    text-indent: 0;
+    clear: none;
+    background-color: transparent;
+    -moz-box-sizing: content-box;
+    -webkit-box-sizing: content-box;
+    -o-box-sizing: content-box;
+    -ms-box-sizing: content-box;
+    box-sizing: content-box;
+    border: none;
+    display: block;
+}
+
+#qiao-mess-wrap a,  .qiao-mess-wrap .qiao-mess-item-body {
+    height: 20px;
+    line-height: 20px;
+}
+#qiao-mess-item input, .qiao-mess-item textarea {
+    padding: 0 3px;
+}
+#qiao-mess-wrap iframe {
+    display: none;
+}
+
+#qiao-mess-wrap-min .qiao-mess-body, 
+#qiao-mess-wrap-min .qiao-mess-foot {
+    display: none;
+}
+#qiao-mess-wrap .qiao-mess-container {
+    background-color: #f5f5f5;
+    width: 256px;
+    bottom: 0px;
+    left: 0px;
+    display: block;
+    cursor: default; 
+    border: solid 1px #3399cc;
+    border-radius: 4px 4px 0 0;
+    border-top: 0;
+}
+
+#qiao-mess-wrap form {
+    padding: 8px 0px 8px 8px; 
+}
+#qiao-mess-wrap  .qiao-mess-head {
+    border-radius: 4px 4px 0 0;
+    padding: 3px 9px 5px;
+    zoom: 1; 
+    width: auto;
+    display: block;
+    height: 21px;
+    _position: relative;
+}
+#qiao-mess-wrap .qiao-mess-head-text {
+    float: left;
+    font-weight: bold;
+    width: 61px;
+    height: 21px; 
+    background:url("http://qiao.baidu.com/v3/res/messbg/img/mess-text.png") no-repeat;
+    _background: none;
+    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src="http://qiao.baidu.com/v3/res/messbg/img/mess-text.png");
+}
+#qiao-mess-wrap .qiao-mess-head-close {
+    float: right;
+    background: url("http://qiao.baidu.com/v3/res/messbg/img/messbtn.png") 0px 0px;
+    width: 19px;
+    height: 19px; 
+    
+}
+
+#qiao-mess-wrap  .qiao-mess-body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: auto; 
+    padding-left: 10px;
+    margin-right: 10px;
+    max-height: 242px;
+    _position: relative;
+    zoom: 1;
+}
+
+#qiao-mess-wrap .qiao-mess-item-mess  textarea {
+    display: block;
+    float:left;
+    height: 92px;
+    border: none;
+    font-size: 12px;
+    padding-top: 2px;
+    width: 194px;
+    border: 1px solid #ccc; 
+    background-color: #fff;
+}
+#qiao-mess-wrap .qiao-mess-item {
+    display: block; 
+    margin: 8px 16px 0 0 ;
+    border: 1px solid #ccc; 
+    display: block; 
+}
+#qiao-mess-wrap .qiao-mess-rowms {
+    display: block; 
+    margin: 0;
+}
+
+
+#qiao-mess-wrap .qiao-mess-input-wrap {
+    overflow: hidden;
+    _zoom: 1;
+}
+#qiao-mess-wrap .qiao-mess-item:hover {
+    border-color: rgb(153, 153, 153);
+}
+#qiao-mess-wrap .qiao-mess-item:hover .qiao-mess-item-head {
+    color: rgb(0, 0, 0);
+}
+#qiao-mess-wrap .qiao-mess-item-message  {
+    margin-top: 0; 
+}
+#qiao-mess-wrap .qiao-mess-item-head {
+    color: #666;
+    float: left;
+    border-right: 1px solid #ccc;
+    padding: 0 4px;
+    background: url("http://qiao.baidu.com/v3/res/messbg/img/mess.gif");
+    line-height: 20px;
+    height: 20px;
+}
+#qiao-mess-wrap .qiao-mess-item-body {
+    float: left;
+    width: 100%;
+    background-color: #fff;
+    cursor: text;
+    height: 20px;
+    line-height: 20px;
+}
+#qiao-mess-wrap .qiao-mess-head-close:hover {
+    background:url("http://qiao.baidu.com/v3/res/messbg/img/messbtn.png") -19px 0px;
+}  
+#qiao-mess-wrap .qiao-mess-head-close:active {
+    background:url("http://qiao.baidu.com/v3/res/messbg/img/messbtn.png") -38px 0px;
+} 
+
+#qiao-mess-wrap .qiao-mess-foot {
+    /*background: #f5f5f5;
+    border: 1px solid #f5f5f5;*/
+    width: auto; 
+    padding: 0 8px;
+    _position: relative;
+}
+#qiao-mess-wrap .qiao-mess-foot-send {
+    width: 91px;
+    margin: 0 auto;
+    text-align: center;
+}
+#qiao-mess-wrap .qiao-mess-foot-send-btn {
+    width: 91px;
+    height: 23px;
+    line-height: 23px;
+    opacity: 1;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    text-align: center;
+    background: #3399CC;
+    cursor: pointer;
+    margin: 0 auto;
+    font-weight: bold;
+}
+#qiao-mess-wrap .qiao-mess-foot-send-btn:hover {
+    background-color: #3399CC;
+    opacity: 0.6;
+    filter:alpha(opacity=60);
+}
+
+#qiao-mess-wrap .qiao-mess-foot-logo {
+    zoom: 1;
+    width: 66px;
+    height: 17px;
+    margin: 5px auto 0 auto;
+    padding-top: 5px;
+    text-align: center;
+    background: url("http://qiao.baidu.com/v3/res/messbg//img/btn.png") -88px -72px;
+}
+
+/*以下是关于皮肤的设置*/
+#qiao-mess-wrap.qiao-mess-wrap-center {
+    left: 50%;
+    top: 50%;
+    margin: -160px 0 0 -129px;
+}
+
+/* 实现 less中的set-skin-min*/
+#qiao-mess-wrap.qiao-mess-wrap-min .qiao-mess-container {
+
+        _filter: none;
+    overflow: hidden;
+}
+#qiao-mess-wrap.qiao-mess-wrap-min .qiao-mess-head-close,
+#qiao-mess-wrap.qiao-mess-wrap-min .qiao-mess-body,
+#qiao-mess-wrap.qiao-mess-wrap-min .qiao-mess-foot {
+    display: none;
+}
+
+/*TODO: 设置container的值*/
+#qiao-mess-wrap .qiao-mess-container {
+            background-color: #f5f5f5;
+        border-color: #3399CC;
+    }
+#qiao-mess-wrap .qiao-mess-container .qiao-mess-head {
+            background-color: #3399CC;
+    }
+#qiao-mess-wrap .qiao-mess-container .qiao-mess-head-text {
+    }
+#qiao-mess-wrap .qiao-mess-container .qiao-mess-head-close {
+    }
+#qiao-mess-wrap .qiao-mess-container .qiao-mess-head-close:hover {
+    }
+#qiao-mess-wrap .qiao-mess-container .qiao-mess-head-close:active {
+    }
+#qiao-mess-wrap .qiao-mess-container .qiao-mess-foot-send-btn {
+    display: block;   
+     
+}
+#qiao-mess-wrap .qiao-mess-container .qiao-mess-foot-send-btn:hover {
+    }
+#qiao-mess-wrap .qiao-mess-container .qiao-mess-foot-send-btn:active {
+    }
+#qiao-mess-wrap .qiao-mess-container .qiao-mess-body {
+    }
+#qiao-mess-wrap .qiao-mess-container textarea {
+            width: 194px;
+    }
+#qiao-mess-wrap .qiao-mess-container .qiao-mess-foot-logo {
+    }

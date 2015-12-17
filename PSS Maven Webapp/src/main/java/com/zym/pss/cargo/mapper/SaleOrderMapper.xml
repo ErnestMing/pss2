@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zym.pss.cargo.mapper.SaleOrderMapper">
+	<resultMap id="SaleOrderRM" type="SaleOrder">
+		<id property="id" column="SALES_ORDER_ID"/>
+		
+		<result property="salesOrderNo" column="SALES_ORDER_NO"/>
+		<result property="customNo" column="CUSTOM_NO"/>
+		<result property="customName" column="CUSTOM_NAME"/>
+		<result property="productNo" column="PRODUCT_NO"/>
+		<result property="productName" column="PRODUCT_NAME"/>
+		<result property="productAmount" column="PRODUCT_AOMOUT"/>
+		<result property="packingUnit" column="PACKING_UNIT"/>
+		<result property="saleTime" column="SALE_TIME"/>
+		<result property="validStartTime" column="VALID_START_TIME"/>
+		<result property="validEndTime" column="VALID_END_TIME"/>
+		
+		<result property="tenantId" column="TENANT_ID"/>
+	</resultMap>
+	
+	<!-- 查询列表 -->
+	<select id="find" parameterType="map" resultMap="SaleOrderRM">
+		select * from SALES_ORDER_C
+		<where>
+			TENANT_ID = #{tenantId}
+			<if test="orderNo != null"> AND SALES_ORDER_NO = #{orderNo}</if>
+			<if test="saleTime != null">AND to_char(SALE_TIME,'yyyy-MM') = #{saleTime}</if>
+		</where>
+	</select>
+	
+		<!-- 分页查询 -->
+	<select id="findPage" resultMap="SaleOrderRM">
+		select * from SALES_ORDER_C
+	</select>
+	
+	<!-- 获取单个 -->
+	<select id="get" parameterType="string" resultMap="SaleOrderRM">
+		select * from SALES_ORDER_C
+		where SALES_ORDER_ID = #{pid}	
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insert" parameterType="SaleOrder">
+		insert into SALES_ORDER_C 
+		(SALES_ORDER_ID,SALES_ORDER_NO,CUSTOM_NO,CUSTOM_NAME,PRODUCT_NO,PRODUCT_NAME,PRODUCT_AOMOUT,PACKING_UNIT,SALE_TIME,VALID_START_TIME,VALID_END_TIME,TENANT_ID)
+		values
+		(
+			#{id , jdbcType = VARCHAR},
+			#{salesOrderNo , jdbcType = VARCHAR},
+			#{customNo , jdbcType = VARCHAR},
+			#{customName , jdbcType = VARCHAR},
+			#{productNo , jdbcType = VARCHAR},
+			#{productName , jdbcType = VARCHAR},
+			#{productAmount , jdbcType = DOUBLE},
+			#{packingUnit , jdbcType = VARCHAR},
+			#{saleTime , jdbcType = TIMESTAMP},
+			#{validStartTime , jdbcType = TIMESTAMP},
+			#{validEndTime , jdbcType = TIMESTAMP},
+			#{tenantId , jdbcType = VARCHAR}
+		)
+	</insert>
+	<!-- 修改 -->
+	<update id="update" parameterType="SaleOrder">
+		update SALES_ORDER_C
+		<set>
+			<if test="salesOrderNo != null">SALES_ORDER_NO = #{salesOrderNo},</if>
+			<if test="customNo != null">CUSTOM_NO = #{customNo},</if>
+			<if test="customName != null">CUSTOM_NAME = #{customName},</if>
+			<if test="productNo != null">PRODUCT_NO = #{productNo},</if>
+			<if test="productName != null">PRODUCT_NAME = #{productName},</if>
+			<if test="productAmount != null">PRODUCT_AOMOUT = #{productAmount},</if>
+			<if test="packingUnit != null">PACKING_UNIT = #{packingUnit},</if>
+			<if test="saleTime != null">SALE_TIME = #{saleTime},</if>
+			<if test="validStartTime != null">VALID_START_TIME = #{validStartTime},</if>
+			<if test="validEndTime != null">VALID_END_TIME = #{validEndTime},</if>
+		</set>
+		where SALES_ORDER_ID = #{id}
+	</update>
+	<!-- 删除单个 -->
+	<delete id="deleteById" parameterType="string">
+		delete from SALES_ORDER_C 
+		where SALES_ORDER_ID = #{pid}
+	</delete>
+		<!-- 批量删除 -->
+	<delete id="delete" parameterType="string">
+		delete from SALES_ORDER_C 
+		where SALES_ORDER_ID in
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+		<!-- 删除销售订单,通过,基础订单编号-->
+	<delete id="deleteByOrderNo" parameterType="map">
+		delete from SALES_ORDER_C
+		where TENANT_ID = #{tenantId} AND SALES_ORDER_NO = #{orderNo} 
+	</delete>
+</mapper>

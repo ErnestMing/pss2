@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zym.pss.cargo.mapper.StockMapper">
+	<resultMap id="StockRM" type="Stock">
+		<id property="id" column="STOCK_ID"/>
+		
+		<result property="repositoryNo" column="REPOSITORY_NO"/>
+		<result property="goodsNo" column="GOODS_NO"/>
+		<result property="goodsName" column="GOODS_NAME"/>
+		<result property="goodsType" column="GOODS_TYPE"/>
+		<result property="amount" column="AMOUNT"/>
+		<result property="packingUnit" column="PACKING_UNIT"/>
+		
+		<result property="tenantId" column="TENANT_ID"/>
+	</resultMap>
+	
+	<!-- 查询列表 -->
+	<select id="find" parameterType="map" resultMap="StockRM">
+		select * from STOCK_C
+		<where>
+			TENANT_ID = #{tenantId}
+			<if test="materialNo != null"> AND materialNo = #{materialNo}</if>
+		</where>
+	</select>
+	
+		<!-- 分页查询 -->
+	<select id="findPage" resultMap="StockRM">
+		select * from STOCK_C
+	</select>
+	
+	<!-- 获取单个 -->
+	<select id="get" parameterType="string" resultMap="StockRM">
+		select * from STOCK_C 
+		where STOCK_ID = #{pid}	
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insert" parameterType="Stock">
+		insert into STOCK_C 
+		(STOCK_ID,REPOSITORY_NO,GOODS_NO,GOODS_NAME,GOODS_TYPE,AMOUNT,PACKING_UNIT,TENANT_ID)
+		values
+		(
+			#{id , jdbcType = VARCHAR},
+			#{repositoryNo , jdbcType = VARCHAR},
+			#{goodsNo , jdbcType = VARCHAR},
+			#{goodsName , jdbcType = VARCHAR},
+			#{goodsType , jdbcType = VARCHAR},
+			#{amount , jdbcType = INTEGER},
+			#{packingUnit , jdbcType = VARCHAR},
+			#{tenantId , jdbcType = VARCHAR}
+		)
+	</insert>
+	<!-- 修改 -->
+	<update id="update" parameterType="Stock">
+		update STOCK_C
+		<set>
+			<if test="repositoryNo != null">REPOSITORY_NO = #{repositoryNo},</if>
+			<if test="goodsNo != null">GOODS_NO = #{goodsNo},</if>
+			<if test="goodsName != null">GOODS_NAME = #{goodsName},</if>
+			<if test="goodsType != null">GOODS_TYPE = #{goodsType},</if>
+			<if test="amount != null">AMOUNT = #{amount},</if>
+			<if test="packingUnit != null">PACKING_UNIT = #{packingUnit},</if>
+		</set>
+		where STOCK_ID = #{id}
+	</update>
+	<!-- 删除单个 -->
+	<delete id="deleteById" parameterType="string">
+		delete from STOCK_C 
+		where STOCK_ID = #{pid}
+	</delete>
+		<!-- 批量删除 -->
+	<delete id="delete" parameterType="string">
+		delete from STOCK_C 
+		where STOCK_ID in
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 根据物品编号,库存编号查询库存记录 -->
+	<select id="findByGoodNo" parameterType="map" resultMap="StockRM">
+		select * from STOCK_C 
+		where TENANT_ID = #{tenantId} AND GOODS_NO = #{goodNo} and REPOSITORY_NO = #{repositoryNo}
+	</select>
+	
+	<!-- 根据物品标号和仓库编号,更新库存量 -->
+	<update id="updateStockAmount" parameterType="map">
+		update STOCK_C
+		set AMOUNT = #{amount}
+		where TENANT_ID = #{tenantId} AND GOODS_NO = #{goodNo} and REPOSITORY_NO = #{repositoryNo}
+	</update>
+</mapper>

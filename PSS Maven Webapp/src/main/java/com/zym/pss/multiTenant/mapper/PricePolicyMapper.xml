@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zym.pss.multiTenant.mapper.PricePolicyMapper">
+	<resultMap id="PricePolicyRM" type="PricePolicy">
+		<id property="id" column="PRICEPOLICY_ID"/>
+		<result property="pricepolicyNo" column="PRICEPOLICY_NO"/>
+		
+		<!-- 冗余字段 -->
+		<result property="functionNo" column="FUNCTION_NO"/>
+		<result property="functionName" column="FUNCTION_NAME"/>
+		
+		<result property="unit" column="UNIT"/>
+		<result property="price" column="PRICE"/>
+	</resultMap>
+	
+	<!-- 查询列表 -->
+	<select id="find" parameterType="map" resultMap="PricePolicyRM">
+		select * from PRICEPOLICY_C
+	</select>
+	<!-- 获取单个信息 -->
+	<select id="get" parameterType="string" resultMap="PricePolicyRM">
+		select * from PRICEPOLICY_C 
+		where PRICEPOLICY_ID = #{pid}	
+	</select>
+	<!-- 添加信息 -->
+	<insert id="insert" parameterType="PricePolicy">
+		insert into PRICEPOLICY_C 
+		(PRICEPOLICY_ID,PRICEPOLICY_NO,FUNCTION_NO,FUNCTION_NAME,UNIT,PRICE)
+		values
+		(
+			#{id , jdbcType = VARCHAR},
+			#{pricepolicyNo , jdbcType = VARCHAR},
+			#{functionNo , jdbcType = VARCHAR},
+			#{functionName , jdbcType = VARCHAR},
+			#{unit , jdbcType = VARCHAR},
+			#{price , jdbcType = DOUBLE}
+		)
+	</insert>
+	<!-- 修改信息 -->
+	<update id="update" parameterType="PricePolicy">
+		update PRICEPOLICY_C
+		<set>
+			<if test="pricepolicyNo != null"> PRICEPOLICY_NO = #{pricepolicyNo},</if>
+			<if test="functionNo != null"> FUNCTION_NO = #{functionNo},</if>
+			<if test="functionName != null"> FUNCTION_NAME = #{functionName},</if>
+			<if test="unit != null"> UNIT = #{unit},</if>
+			<if test="price != null"> PRICE = #{price},</if>
+		</set>
+		where PRICEPOLICY_ID = #{id}
+	</update>
+	<!-- 删除单个信息 -->
+	<delete id="deleteById" parameterType="string">
+		delete from PRICEPOLICY_C 
+		where PRICEPOLICY_ID = #{pid}
+	</delete>
+		<!-- 批量删除信息 -->
+	<delete id="delete" parameterType="string">
+		delete from PRICEPOLICY_C 
+		where PRICEPOLICY_ID in
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

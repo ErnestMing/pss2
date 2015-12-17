@@ -1,0 +1,201 @@
+@charset "utf-8";
+/* CSS Document */
+
+body, div, p, ul, ol, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, form, fieldset, input, textarea, th, td, button {
+	margin: 0;
+	padding: 0;
+	}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	}
+fieldset, img {
+	border: 0;
+	}
+img, input {
+	vertical-align:middle;
+	}
+a {
+	text-decoration: none;
+	}
+ol, ul {
+	list-style: none;
+	}
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+	}
+.hide {
+	display: none;
+	}
+.show {
+	display: run-in;
+}
+
+/*文字相关*/
+.f12 {
+	font-size: 12px;
+	}
+.f13 {
+	font-size: 13px;
+	}
+.f14 {
+	font-size: 14px;
+	}
+.f16 {
+	font-size: 16px;
+	}
+.f18 {
+	font-size: 18px;
+	}
+.f20 {
+	font-size: 20px;
+	}
+.f22 {
+	font-size: 22px;
+	}
+.f24 {
+	font-size: 24px;
+	}
+.f32{
+	font-size:32px;
+}
+.f36{
+	font-size:36px;
+}
+.fb {
+	font-weight: bold;
+	}
+.t2 {
+	text-indent: 2em;
+	}
+.no-bold {
+	font-weight: normal;
+}
+.no-indent {
+	text-indent: 0 !important;
+}
+	
+/*位置相关*/
+.tl {
+	text-align: left !important;
+	}
+.tc {
+	text-align: center;
+	}
+.tr {
+	text-align: right;
+	}
+.bc {
+	margin-left: auto;
+	margin-right: auto;
+	}
+.pos-r {
+	position: relative;
+}
+.pos-a {
+	position: absolute;
+}
+	
+/*浮动相关*/
+.float-l {
+	float: left;
+	display: inline;
+	}
+.float-r {
+	float: right;
+	display: inline;
+	}
+.clear-both {
+	clear: both;
+	}
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+	}
+	
+/*边距*/
+.m5 {
+	margin: 5px;
+	}
+.m10 {
+	margin: 10px;
+	}
+.m15 {
+	margin: 15px;
+	}
+.m20 {
+	margin: 20px;
+	}
+.m30 {
+	margin: 30px;
+	}
+.p5 {
+	padding: 5px;
+	}
+.p10 {
+	padding: 10px;
+	}
+.p15 {
+	padding: 15px;
+	}
+.p20 {
+	padding: 20px;
+	}
+.p30 {
+	padding: 30px;
+	}
+.no-padding {
+	padding: 0px !important;
+}
+.no-padding-t {
+	padding-top: 0px !important;
+}
+.no-padding-r {
+	padding-right: 0px !important;
+}
+.no-padding-b {
+	padding-bottom: 0px !important;
+}
+.no-padding-l {
+	padding-left: 0px !important;
+}
+.no-margin-t {
+	margin-top: 0px !important;
+}
+.no-margin-r {
+	margin-right: 0px !important;
+}
+.no-margin-b {
+	margin-bottom: 0px !important;
+}
+.no-margin-l {
+	margin-left: 0px !important;
+}
+.no-margin-r {
+	margin-right: 0px !important;
+}
+	
+/*边框*/
+.no-border {
+	border: 0px;
+}
+.no-border-t {
+	border-top: 0px !important;
+}
+.no-border-r {
+	border-right: 0px !important;
+}
+.no-border-b {
+	border-bottom: 0px !important;
+}
+.no-border-l {
+	border-left: 0px !important;
+}
+
+/*宽度*/
+.width-fit {
+	width: 100%;
+}

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zym.pss.cargo.mapper.OrderMapper">
+	<resultMap id="OrderRM" type="Order">
+		<id property="id" column="ORDER_ID"/>
+		
+		<result property="orderNo" column="ORDER_NO"/>
+		<result property="type" column="TYPE"/>
+		<result property="state" column="STATE"/>
+		<result property="orderer" column="ORDERER"/>
+		<result property="input" column="INPUT"/>
+		<result property="purchaseTime" column="PURCHASE_TIME"/>
+		<result property="memo" column="MEMO"/>
+		<result property="tenantId" column="TENANT_ID"/>
+	</resultMap>
+	
+	<!-- 查询列表 -->
+	<select id="find" parameterType="map" resultMap="OrderRM">
+		select * from ORDER_C
+		<where>
+			TENANT_ID = #{tenantId}
+			<if test="state != null"> AND STATE = #{state}</if>
+			<if test="orderType != null">AND TYPE = #{orderType}</if>
+		</where>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="findPage" resultMap="OrderRM">
+		select * from ORDER_C
+	</select>
+	
+	<!-- 获取单个 -->
+	<select id="get" parameterType="string" resultMap="OrderRM">
+		select * from ORDER_C 
+		where ORDER_ID = #{pid}	
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insert" parameterType="Order">
+		insert into ORDER_C 
+		(ORDER_ID,ORDER_NO,TYPE,STATE,ORDERER,INPUT,PURCHASE_TIME,MEMO,TENANT_ID)
+		values
+		(
+			#{id , jdbcType = VARCHAR},
+			#{orderNo , jdbcType = VARCHAR},
+			#{type , jdbcType = VARCHAR},
+			#{state , jdbcType = INTEGER},
+			#{orderer , jdbcType = VARCHAR},
+			#{input , jdbcType = VARCHAR},
+			#{purchaseTime , jdbcType = TIMESTAMP},
+			#{memo , jdbcType = VARCHAR},
+			#{tenantId , jdbcType = VARCHAR}
+		)
+	</insert>
+	<!-- 修改 -->
+	<update id="update" parameterType="Order">
+		update ORDER_C
+		<set>
+			<if test="orderNo != null">ORDER_NO = #{orderNo},</if>
+			<if test="type != null">TYPE = #{type},</if>
+			<if test="state != null">STATE = #{state},</if>
+			<if test="orderer != null">ORDERER = #{orderer},</if>
+			<if test="input != null">INPUT = #{input},</if>
+			<if test="purchaseTime != null">PURCHASE_TIME = #{purchaseTime},</if>
+			<if test="memo != null">MEMO = #{memo},</if>
+		</set>
+		where ORDER_ID = #{id}
+	</update>
+	<!-- 删除单个 -->
+	<delete id="deleteById" parameterType="string">
+		delete from ORDER_C 
+		where ORDER_ID = #{pid}
+	</delete>
+		<!-- 批量删除 -->
+	<delete id="delete" parameterType="string">
+		delete from ORDER_C 
+		where ORDER_ID in
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+		<!-- 更新订单状态 -->
+	<update id="updateState" parameterType="map">
+		update ORDER_C
+		set STATE = ${state}
+		where ORDER_ID in 
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+			#{id}		
+		</foreach>
+	</update>
+</mapper>

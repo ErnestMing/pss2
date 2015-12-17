@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<package name="com.zym.pss.baseinfo.po"/>
+		<package name="com.zym.pss.cargo.po"/>
+		<package name="com.zym.pss.cargo.vo"/>
+		<package name="com.zym.pss.sysadmin.po"/>
+		<package name="com.zym.pss.sysadmin.vo"/>
+		<package name="com.zym.pss.multiTenant.po"/>
+		<package name="com.zym.pss.multiTenant.vo"/>
+	</typeAliases>
+	<!-- 注册分页拦截器 -->
+	<plugins>
+		<plugin interceptor="com.zym.pss.core.pargination.PageInterceptor">
+			<property name="databaseType" value="oracle"/>
+		</plugin>
+	</plugins>
+</configuration>

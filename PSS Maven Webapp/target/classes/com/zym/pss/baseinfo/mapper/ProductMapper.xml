@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zym.pss.baseinfo.mapper.ProductMapper">
+	<resultMap id="ProductRM" type="Product">
+		<id property="id" column="PRODUCT_ID"/>
+		
+		<result property="name" column="PRODUCT_NAME"/>
+		<result property="productNo" column="PRODUCT_NO"/>
+		<result property="barCode" column="BAR_CODE"/>
+		<result property="specification" column="SPECIFICATION"/>
+		<result property="packingUnit" column="PACKING_UNIT"/>
+		<result property="price" column="PRICE"/>
+		<result property="description" column="DESCRIPTION"/>
+		<result property="memo" column="MEMO"/>
+		<result property="tenantId" column="TENANT_ID"/>
+	</resultMap>
+	
+	<!-- 查询列表 -->
+	<select id="find" parameterType="map" resultMap="ProductRM">
+		select * from PRODUCT_C
+		<where>
+			TENANT_ID = #{tenantId}
+			<if test="productNo != null"> AND PRODUCT_NO = #{productNo}</if>
+		</where>
+	</select>
+	<!-- 获取单个信息 -->
+	<select id="get" parameterType="string" resultMap="ProductRM">
+		select * from PRODUCT_C 
+		where PRODUCT_ID = #{pid}	
+	</select>
+	<!-- 添加仓库信息 -->
+	<insert id="insert" parameterType="Product">
+		insert into PRODUCT_C 
+		(PRODUCT_ID,PRODUCT_NAME,PRODUCT_NO,BAR_CODE,SPECIFICATION,PACKING_UNIT,PRICE,DESCRIPTION,MEMO,TENANT_ID)
+		values
+		(
+			#{id , jdbcType = VARCHAR},
+			#{name , jdbcType = VARCHAR},
+			#{productNo , jdbcType = VARCHAR},
+			#{barCode , jdbcType = VARCHAR},
+			#{specification , jdbcType = VARCHAR},
+			#{packingUnit , jdbcType = VARCHAR},
+			#{price , jdbcType = DOUBLE},
+			#{description , jdbcType = VARCHAR},
+			#{memo , jdbcType = VARCHAR},
+			#{tenantId , jdbcType = VARCHAR}
+		)
+	</insert>
+	<!-- 修改仓库信息 -->
+	<update id="update" parameterType="Product">
+		update PRODUCT_C
+		<set>
+			<if test="name != null"> PRODUCT_NAME = #{name},</if>
+			<if test="productNo != null"> PRODUCT_NO = #{productNo},</if>
+			<if test="barCode != null">BAR_CODE = #{barCode},</if>
+			<if test="specification != null">SPECIFICATION = #{specification},</if>
+			<if test="packingUnit != null">PACKING_UNIT = #{packingUnit},</if>
+			<if test="price != null">PRICE = #{price},</if>
+			<if test="description != null">DESCRIPTION = #{description},</if>
+			<if test="memo != null">MEMO = #{memo},</if>
+		</set>
+		where PRODUCT_ID = #{id}
+	</update>
+	<!-- 删除单个仓库信息 -->
+	<delete id="deleteById" parameterType="string">
+		delete from PRODUCT_C 
+		where PRODUCT_ID = #{pid}
+	</delete>
+		<!-- 批量删除仓库信息 -->
+	<delete id="delete" parameterType="string">
+		delete from PRODUCT_C 
+		where PRODUCT_ID in
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

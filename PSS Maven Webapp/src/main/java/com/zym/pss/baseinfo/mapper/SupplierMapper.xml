@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zym.pss.baseinfo.mapper.SupplierMapper">
+	<resultMap id="SupplierRM" type="Supplier">
+		<id property="id" column="SUPPLIER_ID"/>
+		
+		<result property="supplierName" column="SUPPLIER_NAME"/>
+		<result property="supplierNo" column="SUPPLIER_NO"/>
+		<result property="shortName" column="SHORT_NAME"/>
+		<result property="contarcts" column="CONTACTS"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="email" column="EMAIL"/>
+		<result property="mobile" column="MOBIL"/>
+		<result property="phone" column="PHONE"/>
+		<result property="fax" column="FAX"/>
+		<result property="memo" column="MEMO"/>
+		
+		<result property="tenantId" column="TENANT_ID"/>
+	</resultMap>
+	
+	<!-- 查询列表 -->
+	<select id="find" parameterType="map" resultMap="SupplierRM">
+		select * from SUPPLIER_C
+		<where>
+			TENANT_ID = #{tenantId}
+		</where>
+	</select>
+	<!-- 获取单个信息 -->
+	<select id="get" parameterType="string" resultMap="SupplierRM">
+		select * from SUPPLIER_C 
+		where SUPPLIER_ID = #{pid}	
+	</select>
+	<!-- 添加仓库信息 -->
+	<insert id="insert" parameterType="Supplier">
+		insert into SUPPLIER_C 
+		( SUPPLIER_ID,SUPPLIER_NAME,SUPPLIER_NO,SHORT_NAME,CONTACTS,ADDRESS,EMAIL,MOBIL,PHONE,FAX,MEMO,TENANT_ID)
+		values
+		(
+			#{id , jdbcType = VARCHAR},
+			#{supplierName , jdbcType = VARCHAR},
+			#{supplierNo , jdbcType = VARCHAR},
+			#{shortName , jdbcType = VARCHAR},
+			#{contarcts , jdbcType = VARCHAR},
+			#{address , jdbcType = VARCHAR},
+			#{email , jdbcType = VARCHAR},
+			#{mobile , jdbcType = VARCHAR},
+			#{phone , jdbcType = VARCHAR},
+			#{fax , jdbcType = VARCHAR},
+			#{memo , jdbcType = VARCHAR},
+			#{tenantId , jdbcType = VARCHAR}
+		)
+	</insert>
+	<!-- 修改仓库信息 -->
+	<update id="update" parameterType="Supplier">
+		update SUPPLIER_C
+		<set>
+			<if test="supplierName != null"> SUPPLIER_NAME = #{supplierName},</if>
+			<if test="supplierNo != null"> SUPPLIER_NO = #{supplierNo},</if>
+			<if test="shortName != null">SHORT_NAME = #{shortName},</if>
+			<if test="contarcts != null">CONTACTS = #{contarcts},</if>
+			<if test="address != null">ADDRESS = #{address},</if>
+			<if test="email != null">EMAIL = #{email},</if>
+			<if test="mobile != null">MOBIL = #{mobile},</if>
+			<if test="phone != null">PHONE = #{phone},</if>
+			<if test="fax != null">FAX = #{fax},</if>
+			<if test="memo != null">MEMO = #{memo},</if>
+		</set>
+		where SUPPLIER_ID = #{id}
+	</update>
+	<!-- 删除单个仓库信息 -->
+	<delete id="deleteById" parameterType="string">
+		delete from SUPPLIER_C 
+		where SUPPLIER_ID = #{pid}
+	</delete>
+		<!-- 批量删除仓库信息 -->
+	<delete id="delete" parameterType="string">
+		delete from SUPPLIER_C 
+		where SUPPLIER_ID in
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

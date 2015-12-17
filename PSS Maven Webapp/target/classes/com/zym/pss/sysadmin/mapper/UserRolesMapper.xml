@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zym.pss.sysadmin.mapper.UserRolesMapper">
+	<resultMap id="UserRolesRM" type="UserRoles">
+		 <id property="id" column="USER_ROLE_ID"/>
+		
+		<result property="userId" column="USER_ID"/>
+		<result property="roleId" column="ROLE_ID"/>
+	</resultMap>
+	
+	<!-- 查询列表 -->
+	<select id="find" parameterType="map" resultMap="UserRolesRM">
+		select * from USER_ROLE_C
+		<where>
+			<if test="userId != null">USER_ID =#{userId}</if>
+			<if test="roleId != null">AND ROLE_ID =#{roleId}</if>
+		</where>
+	</select>
+	
+	<!-- 获取单个信息 -->
+	<select id="get" parameterType="string" resultMap="UserRolesRM">
+		select * from USER_ROLE_C 
+		where USER_ROLE_ID = #{pid}	
+	</select>
+	<!-- 添加信息 -->
+	<insert id="insert" parameterType="UserRoles">
+		insert into USER_ROLE_C 
+		(USER_ROLE_ID,USER_ID,ROLE_ID)
+		values
+		(
+			#{id , jdbcType = VARCHAR},
+			#{userId , jdbcType = VARCHAR},
+			#{roleId , jdbcType = VARCHAR}
+		)
+	</insert>
+	<!-- 修改信息 -->
+	<update id="update" parameterType="UserRoles">
+		update USER_ROLE_C
+		<set>
+			<if test="userId != null"> USER_ID = #{userId},</if>
+			<if test="roleId != null"> ROLE_ID = #{roleId},</if>
+		</set>
+		where USER_ROLE_ID = #{id}
+	</update>
+	<!-- 删除单个-->
+	<delete id="deleteById" parameterType="string">
+		delete from USER_ROLE_C 
+		where USER_ROLE_ID = #{pid}
+	</delete>
+		<!-- 批量删除 -->
+	<delete id="delete" parameterType="string">
+		delete from USER_ROLE_C 
+		where USER_ROLE_ID in
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+		<!-- 删除用户与角色间的关系 -->
+	<delete id="deleteRelation" parameterType="string">
+		delete from USER_ROLE_C
+		where USER_ID = #{userId}
+	</delete>
+</mapper>

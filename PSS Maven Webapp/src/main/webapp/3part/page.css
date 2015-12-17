@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+
+.r-pagination{
+	width: auto;
+	margin: 0px auto;
+	text-align: center;
+	overflow: hidden;
+}
+.r-pagination a{
+	display:inline-table;
+	border: 1px solid #ccc;
+	border-radius:15px;
+	margin: 0px 5px;
+	padding: 0px 10px;
+	line-height: 30px;
+	text-align: center;
+	cursor: pointer;
+}
+.r-pagination a:hover{
+	background: #01b9ff;
+	color: white;
+}
+.r-pagination a.active{
+	background: #01b9ff;
+	color: white;
+}
