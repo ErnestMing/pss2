@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zym.pss.sysadmin.mapper.RoleFuncsMapper">
+	<resultMap id="RoleFuncsRM" type="RoleFuncs">
+		<id property="id" column="ROLE_FUNCTION_ID"/>
+		
+		<result property="roleId" column="ROLE_ID"/>
+		<result property="functionId" column="FUNCTION_ID"/>
+	</resultMap>
+	
+	<!-- 查询列表 -->
+	<select id="find" parameterType="map" resultMap="RoleFuncsRM">
+		select * from ROLE_FUNCTION_C
+		<where>
+			<if test="roleId != null">ROLE_ID = #{roleId}</if>
+			<if test="functionId != null">AND FUNCTION_id = #{functionId}</if>
+		</where>
+	</select>
+	<!-- 获取单个信息 -->
+	<select id="get" parameterType="string" resultMap="RoleFuncsRM">
+		select * from ROLE_FUNCTION_C 
+		where ROLE_FUNCTION_ID = #{pid}	
+	</select>
+	<!-- 添加信息 -->
+	<insert id="insert" parameterType="RoleFuncs">
+		insert into ROLE_FUNCTION_C 
+		(ROLE_FUNCTION_ID,ROLE_ID,FUNCTION_ID)
+		values
+		(
+			#{id , jdbcType = VARCHAR},
+			#{roleId , jdbcType = VARCHAR},
+			#{functionId , jdbcType = VARCHAR}
+		)
+	</insert>
+	<!-- 修改信息 -->
+	<update id="update" parameterType="RoleFuncs">
+		update ROLE_FUNCTION_C
+		<set>
+			<if test="roleId != null"> ROLE_ID = #{roleId},</if>
+			<if test="functionId != null"> FUNCTION_ID = #{functionId},</if>
+		</set>
+		where ROLE_FUNCTION_ID = #{id}
+	</update>
+	<!-- 删除单个-->
+	<delete id="deleteById" parameterType="string">
+		delete from ROLE_FUNCTION_C 
+		where ROLE_FUNCTION_ID = #{pid}
+	</delete>
+		<!-- 批量删除 -->
+	<delete id="delete" parameterType="string">
+		delete from ROLE_FUNCTION_C 
+		where ROLE_FUNCTION_ID in
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	<!-- 删除角色月权限间的关系 -->
+	<delete id="deleteRelation" parameterType="string">
+		delete from ROLE_FUNCTION_C
+		where ROLE_ID = #{roleId}
+	</delete>
+</mapper>

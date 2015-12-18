@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zym.pss.cargo.mapper.PurchaseOrderMapper">
+	<resultMap id="PurchaseOrderRM" type="PurchaseOrder">
+		<id property="id" column="PURCHASE_ORDER_ID"/>
+		
+		<result property="purchaseOrderNo" column="PURCHASE_ORDER_NO"/>
+		
+		<!-- 冗余字段 -->
+		<result property="materialNo" column="MATERIAL_NO"/>
+		<result property="materialName" column="MATERIAL_NAME"/>
+		<result property="supplierNo" column="SUPPLIER_NO"/>
+		<result property="supplierName" column="SUPPLIER_NAME"/>
+
+		<result property="materialAmount" column="MATERIAL_AMOUNT"/>
+		<result property="packingUnit" column="PACKING_UNIT"/>
+		<result property="phone" column="PHONE"/>
+		<result property="purchaseTime" column="PURCHASE_TIME"/>
+		
+		<result property="tenantId" column="TENANT_ID"/>
+	</resultMap>
+	<!-- 查询列表 -->
+	<select id="find" parameterType="map" resultMap="PurchaseOrderRM">
+		select * from PURCHASE_ORDER_C
+		<where>
+			TENANT_ID = #{tenantId}
+			<if test="orderNo != null"> AND PURCHASE_ORDER_NO = #{orderNo}</if>
+			<if test="purchaseTime != null">AND to_char(PURCHASE_TIME,'yyyy-MM') = #{purchaseTime}</if>
+		</where>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="findPage" resultMap="PurchaseOrderRM">
+		select * from PURCHASE_ORDER_C
+	</select>
+	
+	<!-- 获取单个 -->
+	<select id="get" parameterType="string" resultMap="PurchaseOrderRM">
+		select * from PURCHASE_ORDER_C 
+		where PURCHASE_ORDER_ID = #{pid}	
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insert" parameterType="PurchaseOrder">
+		insert into PURCHASE_ORDER_C 
+		(PURCHASE_ORDER_ID,PURCHASE_ORDER_NO,MATERIAL_NO,MATERIAL_NAME,SUPPLIER_NO,SUPPLIER_NAME,MATERIAL_AMOUNT,PACKING_UNIT,PHONE,PURCHASE_TIME,TENANT_ID)
+		values
+		(
+			#{id , jdbcType = VARCHAR},
+			#{purchaseOrderNo , jdbcType = VARCHAR},
+			#{materialNo , jdbcType = VARCHAR},
+			#{materialName , jdbcType = VARCHAR},
+			#{supplierNo , jdbcType = VARCHAR},
+			#{supplierName , jdbcType = VARCHAR},
+			#{materialAmount , jdbcType = DOUBLE},
+			#{packingUnit , jdbcType = VARCHAR},
+			#{phone , jdbcType = VARCHAR},
+			#{purchaseTime , jdbcType = TIMESTAMP},
+			#{TENANT_ID , jdbcType = VARCHAR}
+		)
+	</insert>
+	<!-- 修改 -->
+	<update id="update" parameterType="PurchaseOrder">
+		update PURCHASE_ORDER_C
+		<set>
+			<if test="purchaseOrderNo != null">PURCHASE_ORDER_NO = #{purchaseOrderNo},</if>
+			<if test="materialNo != null">MATERIAL_NO = #{materialNo},</if>
+			<if test="materialName != null">MATERIAL_NAME = #{materialName},</if>
+			
+			<if test="supplierNo != null">SUPPLIER_NO = #{supplierNo},</if>
+			<if test="supplierName != null">SUPPLIER_NAME = #{supplierName},</if>
+			
+			<if test="materialAmount != null">MATERIAL_AMOUNT = #{materialAmount},</if>
+			<if test="packingUnit != null">PACKING_UNIT = #{packingUnit},</if>
+			<if test="phone != null">PHONE = #{phone},</if>
+			<if test="purchaseTime != null">PURCHASE_TIME = #{purchaseTime},</if>
+		</set>
+		where PURCHASE_ORDER_ID = #{id}
+	</update>
+	
+	<!-- 删除单个 -->
+	<delete id="deleteById" parameterType="string">
+		delete from PURCHASE_ORDER_C 
+		where PURCHASE_ORDER_ID = #{pid}
+	</delete>
+	
+		<!-- 批量删除 -->
+	<delete id="delete" parameterType="string">
+		delete from PURCHASE_ORDER_C 
+		where PURCHASE_ORDER_ID in
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+	<!-- 通过订单编号删除该订单下所有的采购原材料 -->
+	<delete id="deleteByOrderNo" parameterType="map">
+		delete from PURCHASE_ORDER_C
+		where TENANT_ID = #{tenantId} AND PURCHASE_ORDER_NO = #{orderNo} 
+	</delete>
+</mapper>

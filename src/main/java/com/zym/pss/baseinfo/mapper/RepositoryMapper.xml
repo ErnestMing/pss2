@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zym.pss.baseinfo.mapper.RepositoryMapper">
+	<resultMap id="RepositoryRM" type="Repository">
+		<id property="id" column="REPOSITORY_ID"/>
+		
+		<result property="repositoryNo" column="REPOSITORY_NO"/>
+		<result property="name" column="REPOSITORY_NAME"/>
+		<result property="shortName" column="SHORT_NAME"/>
+		<result property="type" column="TYPE"/>
+		<result property="location" column="LOCATION"/>
+		<result property="createTime" column="CREATE_TIME"/>
+		<result property="area" column="AREA" />
+		<result property="memo" column="MEMO"/>
+		<result property="tenantId" column="TENANT_ID"/>
+	</resultMap>
+	
+	<!-- 查询列表 -->
+	<select id="find" parameterType="map" resultMap="RepositoryRM">
+		select * from repository_c
+		<where>
+			TENANT_ID = #{tenantId} 
+			<if test="type != null"> AND TYPE = #{type}</if>
+		</where>
+	</select>
+	<!-- 获取单个信息 -->
+	<select id="get" parameterType="string" resultMap="RepositoryRM">
+		select * from repository_c 
+		where repository_id = #{pid}	
+	</select>
+	<!-- 添加仓库信息 -->
+	<insert id="insert" parameterType="Repository">
+		insert into repository_c 
+		(REPOSITORY_ID,REPOSITORY_NO,REPOSITORY_NAME,SHORT_NAME,TYPE,CREATE_TIME,LOCATION,AREA,MEMO,TENANT_ID)
+		values
+		(
+			#{id , jdbcType = VARCHAR},
+			#{repositoryNo , jdbcType = VARCHAR},
+			#{name , jdbcType = VARCHAR},
+			#{shortName , jdbcType = VARCHAR},
+			#{type , jdbcType = VARCHAR},
+			#{createTime , jdbcType = VARCHAR},
+			#{location , jdbcType = VARCHAR},
+			#{area , jdbcType = VARCHAR},
+			#{memo , jdbcType = VARCHAR},
+			#{tenantId , jdbcType = VARCHAR}
+		)
+	</insert>
+	<!-- 修改仓库信息 -->
+	<update id="update" parameterType="Repository">
+		update repository_c
+		<set>
+			<if test="repositoryNo != null">REPOSITORY_NO = #{repositoryNo},</if>
+			<if test="name != null">REPOSITORY_NAME = #{name},</if>
+			<if test="shortName != null">SHORT_NAME = #{shortName},</if>
+			<if test="type != null">TYPE = #{type},</if>
+			<if test="createTime != null">CREATE_TIME = #{createTime},</if>
+			<if test="location != null">LOCATION = #{location},</if>
+			<if test="area != null">AREA = #{area},</if>
+			<if test="memo != null">MEMO = #{memo},</if>
+		</set>
+		where repository_id = #{id}
+	</update>
+	<!-- 删除单个仓库信息 -->
+	<delete id="deleteById" parameterType="string">
+		delete from repository_c 
+		where repository_id = #{pid}
+	</delete>
+		<!-- 批量删除仓库信息 -->
+	<delete id="delete" parameterType="string">
+		delete from repository_c 
+		where repository_id in
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

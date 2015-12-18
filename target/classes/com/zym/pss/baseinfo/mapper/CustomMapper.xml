@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zym.pss.baseinfo.mapper.CustomMapper">
+	<resultMap id="CustomRM" type="Custom">
+		<id property="id" column="CUSTOM_ID"/>
+		
+		<result property="customNo" column="CUSTOM_NO"/>
+		<result property="name" column="CUSTOM_NAME"/>
+		<result property="shortName" column="SHORT_NAME"/>
+		<result property="contacts" column="CONTACTS"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="email" column="EMAIL"/>
+		<result property="mobile" column="MOBIL"/>
+		<result property="fax" column="FAX"/>
+		<result property="memo" column="MEMO"/>
+		<result property="tenantId" column="TENANT_ID"/>
+	</resultMap>
+	
+	<!-- 查询列表 -->
+	<select id="find" parameterType="map" resultMap="CustomRM">
+		select * from CUSTOM_C
+		<where>
+			TENANT_ID = #{tenantId}
+		</where>
+	</select>
+	<!-- 获取单个信息 -->
+	<select id="get" parameterType="string" resultMap="CustomRM">
+		select * from CUSTOM_C 
+		where CUSTOM_ID = #{pid}	
+	</select>
+	<!-- 添加仓库信息 -->
+	<insert id="insert" parameterType="Custom">
+		insert into CUSTOM_C 
+		(CUSTOM_ID,CUSTOM_NO,CUSTOM_NAME,SHORT_NAME,CONTACTS,ADDRESS,EMAIL,MOBIL,FAX, MEMO,TENANT_ID)
+		values
+		(
+			#{id , jdbcType = VARCHAR},
+			#{customNo , jdbcType = VARCHAR},
+			#{name , jdbcType = VARCHAR},
+			#{shortName , jdbcType = VARCHAR},
+			#{contacts , jdbcType = VARCHAR},
+			#{address , jdbcType = VARCHAR},
+			#{email , jdbcType = VARCHAR},
+			#{mobile , jdbcType = VARCHAR},
+			#{fax , jdbcType = VARCHAR},
+			#{memo , jdbcType = VARCHAR},
+			#{tenantId , jdbcType = VARCHAR}
+		)
+	</insert>
+	<!-- 修改仓库信息 -->
+	<update id="update" parameterType="Custom">
+		update CUSTOM_C
+		<set>
+			<if test="customNo != null"> CUSTOM_NO = #{customNo},</if>
+			<if test="name != null"> CUSTOM_NAME = #{name},</if>
+			<if test="shortName != null">SHORT_NAME = #{shortName},</if>
+			<if test="contacts != null">CONTACTS = #{contacts},</if>
+			<if test="address != null">ADDRESS = #{address},</if>
+			<if test="email != null">EMAIL = #{email},</if>
+			<if test="mobile != null">MOBIL = #{mobile},</if>
+			<if test="fax != null">FAX = #{fax},</if>
+			<if test="memo != null">MEMO = #{memo},</if>
+		</set>
+		where CUSTOM_ID = #{id}
+	</update>
+	<!-- 删除单个仓库信息 -->
+	<delete id="deleteById" parameterType="string">
+		delete from CUSTOM_C 
+		where CUSTOM_ID = #{pid}
+	</delete>
+		<!-- 批量删除仓库信息 -->
+	<delete id="delete" parameterType="string">
+		delete from CUSTOM_C 
+		where CUSTOM_ID in
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

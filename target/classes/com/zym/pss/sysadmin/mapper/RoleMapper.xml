@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zym.pss.sysadmin.mapper.RoleMapper">
+	<resultMap id="RoleRM" type="Role">
+		<id property="id" column="ROLE_ID"/>
+		
+		<result property="roleNo" column="ROLE_NO"/>
+		<result property="name" column="NAME"/>
+		<result property="description" column="DESCRIPTION"/>
+		<result property="tenantId" column="TENANT_ID"/>
+	</resultMap>
+	
+	<!-- 角色权限VO -->
+	<resultMap id="RoleFuncsVO" type="RoleFuncsVo">
+		<result property="roleId" column="ROLE_ID"/>
+		<result property="roleNo" column="ROLE_NO"/>
+		<result property="roleName" column="NAME"/>
+		<result property="roleFuncsID" column="ROLE_FUNCTION_ID"/>
+		<result property="functionNo" column="FUNCTION_NO"/>
+		<result property="functionURL" column="FUNCTION_URL"/>
+		<result property="functionName" column="FUNCTION_NAME"/>
+	</resultMap>
+	
+	<!-- 角色VO类 -->
+	<resultMap id="RoleVoRM" type="RoleVo" extends="RoleRM">
+		<collection property="roleFuncs" ofType="Function">
+			<id property="id" column="FUNCTION_ID"/>
+		
+			<result property="functionNo" column="FUNCTION_NO"/>
+			<result property="functionURL" column="FUNCTION_URL"/>
+			<result property="functionName" column="FUNCTION_NAME"/>
+		</collection>
+	</resultMap>
+	
+	<!-- 查询列表 -->
+	<select id="find" parameterType="map" resultMap="RoleRM">
+		select * from ROLE_C
+		<where>
+			<if test="tenantId != null">TENANT_ID = #{tenantId}</if>		
+		</where>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="findPage" resultMap="RoleRM">
+		select * from ROLE_C
+	</select>
+	
+	<!-- 查询Role VO类 -->
+	<select id="findRoleVo" parameterType="map" resultMap="RoleVoRM">
+		select r.* , f.function_id function_id ,f.function_no function_no , f.function_url function_url , f.function_name function_name
+		from role_c r
+		left join
+		(
+		     select * 
+		     from role_function_c
+		)rf
+		on r.role_id = rf.role_id
+		left join 
+		(
+		     select * 
+		     from function_c
+		)f 
+		on rf.function_id = f.function_id
+		<where>
+			<if test="tenantId != null">TENANT_ID = #{tenantId}</if>		
+		</where>
+	</select>
+	
+	<!-- 获取角色权限集合 -->
+	<select id="findFuncs" parameterType="string" resultMap="RoleFuncsVO" >
+		select r.role_id ROLE_ID,r.role_no ROLE_NO ,r.name NAME ,l.role_function_id ROLE_FUNCTION_ID,l.function_no FUNCTION_NO , l.function_url FUNCTION_URL , l.function_name FUNCTION_NAME
+		from role_c r
+		left join
+		(
+		      select rf.role_id role_id,rf.role_function_id role_function_id,f.function_no function_no, f.function_url function_url, f.function_name function_name
+		      from role_function_c rf 
+		      left join(
+		           select * 
+		           from function_c            
+		      ) f
+		      on rf.function_id = f.function_id
+		) l 
+		on l.role_id = r.role_id
+		where r.role_id = #{roleId}
+	</select>
+	
+	<!-- 获取单个信息 -->
+	<select id="get" parameterType="string" resultMap="RoleRM">
+		select * from ROLE_C 
+		where ROLE_ID = #{pid}	
+	</select>
+	
+	<!-- 添加信息 -->
+	<insert id="insert" parameterType="Role">
+		insert into ROLE_C 
+		(ROLE_ID,ROLE_NO,NAME,DESCRIPTION,TENANT_ID)
+		values
+		(
+			#{id , jdbcType = VARCHAR},
+			#{roleNo , jdbcType = VARCHAR},
+			#{name , jdbcType = VARCHAR},
+			#{description , jdbcType = VARCHAR},
+			#{tenantId , jdbcType = VARCHAR}
+		)
+	</insert>
+	<!-- 修改信息 -->
+	<update id="update" parameterType="Role">
+		update ROLE_C
+		<set>
+			<if test="name != null"> NAME = #{name},</if>
+			<if test="roleNo != null"> ROLE_NO = #{roleNo},</if>
+			<if test="description != null">DESCRIPTION = #{description},</if>
+			<if test="tenantId != null">TENANT_ID = #{tenantId},</if>
+		</set>
+		where ROLE_ID = #{id}
+	</update>
+	<!-- 删除单个-->
+	<delete id="deleteById" parameterType="string">
+		delete from ROLE_C 
+		where ROLE_ID = #{pid}
+	</delete>
+		<!-- 批量删除 -->
+	<delete id="delete" parameterType="string">
+		delete from ROLE_C 
+		where ROLE_ID in
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+	
+</mapper>

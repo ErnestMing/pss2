@@ -1,0 +1,130 @@
+#qiao-invite-wrap {
+    position: fixed;
+    _position:absolute;
+}
+#qiao-flash-storage {
+    position: fixed;
+    _position: absolute;
+    width: 1px;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+}
+
+#qiao-wrap {
+    display: block;
+}
+
+#qiao-invite-wrap {
+    overflow: hidden !important;
+}
+
+#qiao-invite-wrap .qiao-invite-text p,
+.qiao-mess-wrap form {
+     /**
+     * width: 100%;
+     */
+    width: auto;
+    height: auto;
+
+    /**
+     * margin: 0 auto;
+     */
+    margin: 0;
+    padding: 0;
+
+    background-color: transparent;
+    background-position: 0% 0%; 
+    background-size: auto; 
+    background-repeat: repeat;
+    background-origin: padding-box; 
+    background-clip: border-box; 
+    background-attachment: scroll; 
+    background-image: none;
+
+    border: none;
+    outline: invert none medium;
+
+    color: #000;
+    direction: ltr;
+    letter-spacing: normal;
+    line-height: normal;
+    text-align: left;
+    text-decoration: none;
+    text-indent: 0;
+    text-transform: none;
+    white-space: normal;
+    word-spacing: normal;
+
+    font-size: 12px;
+    font-family: Tahoma,Helvetica,sans-serif;
+    font-size-adjust: none;
+    font-stretch: normal;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: inherit;
+
+    visibility: inherit;
+    overflow:  visible;
+
+    list-style: none;
+
+    float: none;
+    /**
+     * clear: both;
+     */
+    clear: none;
+
+    position: static;
+    top: auto;
+    left: auto;
+
+    vertical-align: baseline;
+
+    -moz-box-sizing: content-box;  
+    -webkit-box-sizing: content-box; 
+    -o-box-sizing: content-box; 
+    -ms-box-sizing: content-box; 
+    box-sizing: content-box;
+}
+
+#qiao-invite-wrap .qiao-invite-text p span {
+    display: inline;
+}
+#qiao-wrap::before,
+#qiao-wrap::after,
+#qiao-wrap ins::before,
+#qiao-wrap ins::after,
+#qiao-wrap a::before,
+#qiao-wrap a::after,
+#qiao-wrap input::before,
+#qiao-wrap input::after,
+#qiao-wrap textarea::before,
+#qiao-wrap textarea::after,
+#qiao-fixed-wrap::before,
+#qiao-fixed-wrap::after,
+#qiao-fixed-wrap ins::before,
+#qiao-fixed-wrap ins::after,
+#qiao-fixed-wrap a::before,
+#qiao-fixed-wrap a::after,
+#BDBridgeFixedWrap::before,
+#BDBridgeFixedWrap::after,
+#BDBridgeFixedWrap ins::before,
+#BDBridgeFixedWrap ins::after,
+#BDBridgeFixedWrap a::before,
+#BDBridgeFixedWrap a::after
+{
+    content: "";
+}
+
+#qiao-mess-wrap .qiao-mess-clearfix:before, 
+#qiao-mess-wrap .qiao-mess-clearfix:after {
+    content: "";
+    display: table;
+}
+#qiao-mess-wrap .qiao-mess-clearfix:after{
+    clear: both;
+}
+#qiao-mess-wrap .qiao-mess-clearfix{
+    *zoom: 1;/*ie6,7*/
+}

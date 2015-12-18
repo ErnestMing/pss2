@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zym.pss.cargo.mapper.MaterialPutMapper">
+	<resultMap id="MaterialPutRM" type="MaterialPut">
+		<id property="id" column="MATERIAL_PUT_ID"/>
+		
+		<result property="materialNo" column="MATERIAL_NO"/>
+		<result property="materialName" column="MATERIAL_NAME"/>
+		<result property="materialAmount" column="MATERIAL_AMOUNT"/>
+		<result property="packingUnit" column="PACKING_UNIT"/>
+		<result property="operator" column="OPERATOR"/>
+		<result property="repositoryNo" column="REPOSITORY_NO"/>
+		<result property="putTime" column="PUT_TIME"/>
+		<result property="state" column="STATE"/>
+		<result property="memo" column="MEMO"/>
+		<result property="tenantId" column="TENANT_ID"/>
+	</resultMap>
+	
+	<!-- 查询列表 -->
+	<select id="find" parameterType="map" resultMap="MaterialPutRM">
+		select * from MATERIAL_PUT_C
+		<where>
+			TENANT_ID = #{tenantId}
+		</where>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="findPage" resultMap="MaterialPutRM">
+		select * from MATERIAL_PUT_C
+	</select>
+	
+	<!-- 获取单个 -->
+	<select id="get" parameterType="string" resultMap="MaterialPutRM">
+		select * from MATERIAL_PUT_C 
+		where MATERIAL_PUT_ID = #{pid}	
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insert" parameterType="MaterialPut">
+		insert into MATERIAL_PUT_C 
+		(MATERIAL_PUT_ID,MATERIAL_NO,MATERIAL_NAME,MATERIAL_AMOUNT,PACKING_UNIT,OPERATOR,REPOSITORY_NO,PUT_TIME,STATE,MEMO,TENANT_ID)
+		values
+		(
+			#{id , jdbcType = VARCHAR},
+			#{materialNo , jdbcType = VARCHAR},
+			#{materialName , jdbcType = VARCHAR},
+			#{materialAmount , jdbcType = DOUBLE},
+			#{packingUnit , jdbcType = VARCHAR},
+			#{operator , jdbcType = VARCHAR},
+			#{repositoryNo , jdbcType = VARCHAR},
+			#{putTime , jdbcType = TIMESTAMP},
+			#{state, jdbcType = INTEGER},
+			#{memo , jdbcType = VARCHAR},
+			#{tenantId , jdbcType = VARCHAR}
+		)
+	</insert>
+	<!-- 修改 -->
+	<update id="update" parameterType="MaterialPut">
+		update MATERIAL_PUT_C
+		<set>
+			<if test="materialNo != null">MATERIAL_NO = #{materialNo},</if>
+			<if test="materialName != null">MATERIAL_NAME = #{materialName},</if>
+			<if test="materialAmount != null">MATERIAL_AMOUNT = #{materialAmount},</if>
+			<if test="packingUnit != null">PACKING_UNIT = #{packingUnit},</if>
+			<if test="operator != null">OPERATOR = #{operator},</if>
+			<if test="repositoryNo != null">REPOSITORY_NO = #{repositoryNo},</if>
+			<if test="putTime != null">PUT_TIME = #{putTime},</if>
+			<if test="state != null">STATE = #{state},</if>
+			<if test="memo != null">MEMO = #{memo},</if>
+		</set>
+		where MATERIAL_PUT_ID = #{id}
+	</update>
+		<!-- 删除单个 -->
+	<delete id="deleteById" parameterType="string">
+		delete from MATERIAL_PUT_C 
+		where MATERIAL_PUT_ID = #{pid}
+	</delete>
+		<!-- 批量删除 -->
+	<delete id="delete" parameterType="string">
+		delete from MATERIAL_PUT_C 
+		where MATERIAL_PUT_ID in
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+		<!-- 更新状态 -->
+	<update id="updateState" parameterType="map">
+		update MATERIAL_PUT_C
+		set STATE = ${state}
+		where MATERIAL_PUT_ID in 
+		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+			#{id}		
+		</foreach>
+	</update>
+</mapper>

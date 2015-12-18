@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+			http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+			http://www.springframework.org/schema/mvc 
+			http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd 
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+			http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+			http://www.springframework.org/schema/tx 
+			http://www.springframework.org/schema/tx/spring-tx-3.0.xsd ">
+			
+<!-- 1. 加载数据库配置属性文件 -->
+	<context:property-placeholder  location="classpath:db.properties"/>
+	
+<!-- 2. 包扫描 dao、service -->
+	<!-- 核心模块 -->
+	<context:component-scan base-package="com.zym.pss.core.dao,com.zym.pss.core.service"/>
+	<!-- 基础信息模块 -->
+	<context:component-scan base-package="com.zym.pss.baseinfo.dao,com.zym.pss.baseinfo.service"/>
+	<!-- 业务管理模块 -->
+	<context:component-scan base-package="com.zym.pss.cargo.dao,com.zym.pss.cargo.service"/>
+	<!-- 系统管理模块 -->
+	<context:component-scan base-package="com.zym.pss.sysadmin.dao,com.zym.pss.sysadmin.service"/>
+	<!-- 租户模块 -->
+	<context:component-scan base-package="com.zym.pss.multiTenant.dao,com.zym.pss.multiTenant.service"/>
+	
+<!-- 3. 数据源dataSource -->
+	<bean id = "dataSource" class = "com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driverClassName}"/>
+		<property name="jdbcUrl" value="${jdbc.url}"/>
+		<property name="user" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
+		<property name="initialPoolSize" value="${c3p0.pool.initialPoolSize}"/>
+		<property name="maxPoolSize" value="${c3p0.pool.maxPoolSize}"/>
+		<property name="minPoolSize" value="${c3p0.pool.minPoolSize}"/>
+		<property name="acquireIncrement" value="${c3p0.pool.acquireIncrement}"/>
+	</bean>
+<!-- 4.配置sqlSessionFactory -->
+	<bean id ="sqlSessionFactory" class = "org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+			<!-- 整合 Mybatis -->
+			<!-- 扫描配置文件 -->
+		<property name="configLocation" value="classpath:sqlMapConfig.xml"/>
+			<!-- 扫描Mapper -->	
+		<property name="mapperLocations" value="classpath:com/zym/pss/*/mapper/*.xml"/>
+	</bean>
+	
+	
+<!-- 5.事务声明 -->
+	<bean id = "txManager" class = "org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+<!-- 6.事务通知 -->
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="insert*" propagation="REQUIRED"/>
+			<tx:method name="update*" propagation="REQUIRED"/>
+			<tx:method name="delete*" propagation="REQUIRED"/>
+			<tx:method name="save*" propagation="REQUIRED"/>
+			
+			<tx:method name="find*" read-only="true"/>
+			<tx:method name="get*" read-only="true"/>
+			<tx:method name="view*" read-only="true"/>
+		</tx:attributes>
+	</tx:advice>
+
+<!-- 事务切面 -->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.zym.pss.*.service.*.*(..))" id="txPointcut"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
+	</aop:config>
+</beans>

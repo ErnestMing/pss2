@@ -1,0 +1,425 @@
+@charset "utf-8";
+@import url("prodialog-v2.css");
+/*头部*/
+.header-v2-wrap {
+	position: relative;
+}
+
+
+/*头部结束*/
+
+/*主体*/
+.regAndLogin-main {
+	min-height: 631px;
+	background: url(../images/regAndLogin/main-bg.jpg) no-repeat;
+	background-size: 100% 100%;
+}
+
+.regAndLogin-mainMax {
+	min-height: 670px;
+	background: url(../images/regAndLogin/main-bg.jpg) no-repeat;
+	background-size: 100% 100%;
+}
+/*主体结束*/
+
+/*表单*/
+.input-text {
+	width: 278px;
+	height: 34px;
+	padding: 0px 10px;
+	border: 1px solid #e5e5e5;
+	border-radius: 0px;
+}
+
+.btn-v2 {
+	height: 34px;
+	border: 1px solid #2bbfbd;
+}
+.btn-disable-v2 {
+	height: 34px;
+	border: 1px solid #c0c0c0;
+	background: #c0c0c0;
+}
+.input-error {
+    border: 1px solid red;
+}
+.input-select {
+	width: 300px;
+	height: 36px;
+}
+/*表单结束*/
+
+/*注册*/
+.main-panel {
+	width: 698px;
+}
+.main-panel-header {
+	height: 45px;
+	line-height: 45px;
+	border-bottom: 1px solid #279f9d;
+	color: #fff;
+	background: #31c7c5;
+}
+.main-panel-content {
+	padding: 45px 35px 0px 35px;
+	min-height: 540px;
+	background: #fff;
+	overflow: hidden;
+}
+
+.main-panel-contentMax {
+	padding: 45px 35px 0px 35px;
+	min-height: 640px;
+	background: #fff;
+	overflow: hidden;
+}
+.main-panel-content-login {
+	padding: 45px 35px 0px 35px;
+	height: 540px;
+	background: #fff;
+	overflow: hidden;
+}
+.main-panel-step{
+	padding-bottom: 40px;
+	background-position: center bottom !important;
+}
+#main-panel-step-1{
+	background: url(reg-step-1.png) no-repeat;
+}
+#step-item-1{
+	margin-left:100px;
+}
+#step-item-2, #step-item-3 {
+	margin-left: 145px;
+}
+.panel-form {
+	width: 300px;
+	margin-top: 35px;
+}
+#verification-code {
+	width: 158px;
+}
+#get-verification-code {
+	width: 106px;
+	margin-left: 12px;
+}
+
+#get-verification-code-joinCompany {
+	width: 106px;
+	margin-left: 12px;
+}
+
+.input-agree {
+	padding: 15px 0px 20px 0px;
+}
+.reg-submit {
+	width: 298px;
+}
+
+.step2-tab {
+	margin-top: 35px;
+	width: 300px;
+}
+.step2-tab li {
+	float: left;
+	width: 148px;
+	padding: 10px 0px;
+	text-align: center;
+	border: 1px solid #d7d7d7;
+	border-left: 1px solid #e9e9e9;
+	background: #e9e9e9;
+	cursor: pointer;
+}
+#tab-createCompany {
+	border-left: 1px solid #d7d7d7;
+}
+.step2-tab .tab-active {
+	color: #fff;
+	border: 1px solid #2bbfbd;
+	background: #60cfce;
+}
+.step2-tab-content {
+	margin-top: 15px;
+}
+.step2-tab-content .panel-form {
+	margin-top: 0px;
+}
+.handle-next {
+	padding-top: 20px;
+}
+
+#panel-content-step-3 {
+	padding: 45px 0px 0px 0px;
+}
+#main-panel-step-3 {
+	padding: 0px 35px 40px 35px;
+	background: url(../images/regAndLogin/reg-step-3.png) no-repeat;
+}
+.reg-selectApp {
+	margin-top: 40px;
+}
+.reg-selectApp-h {
+	padding: 0px 35px 10px 35px;
+	border-bottom: 1px solid #e8e8e8;
+}
+.selectApp-h-explain {
+	color: #999999;
+}
+.reg-selectApp-list {
+	padding: 0px 20px 0px 35px;
+	height: 250px;
+	border-bottom: 1px solid #e8e8e8;
+	overflow: auto;
+}
+.selectApp-table {
+	margin: 5px 0px;
+}
+.selectApp-table tr {
+	height: 62px;
+}
+.selectApp-viewDetail {
+	display: block;
+	width: 20px;
+	height: 20px;
+	background: url(../images/magnifying-glass.png) no-repeat;
+	cursor: pointer;
+}
+
+#main-panel-step-4 {
+	background: url(../images/regAndLogin/reg-step-4.png) no-repeat;
+}
+.reg-end-content {
+	margin-top: 55px;
+	color: #383838;
+	line-height: 24px;
+}
+.reg-complete-msg {
+	margin-bottom: 12px;
+}
+.reg-two-code-list {
+	margin-top: 20px;
+	margin-bottom: 15px;
+	padding-left: 122px;
+}
+.reg-two-code-list li {
+	float: left;
+	margin-left: 45px;
+	padding-bottom: 40px;
+	background-position: center bottom !important;
+}
+#two-code-ios {
+	background: url(../images/regAndLogin/icon-ios.png) no-repeat;
+}
+#two-code-android {
+	background: url(../images/regAndLogin/icon-android.png) no-repeat;
+}
+#two-code-wechat {
+	background: url(../images/regAndLogin/icon-wechat.png) no-repeat;
+}
+#two-code-wechat img{
+	width: 98px;
+	height: 98px;
+}
+/*注册结束*/
+
+/*登录*/
+#login-main {
+	background: url(../images/regAndLogin/main-bg.jpg) no-repeat;
+	background-size: 100% 100%;
+}
+.main-panel-login {
+	width: 444px;
+	height: 631px;
+	background: #fff;
+	/*border-left: 1px solid #d4d2d0;
+	border-right: 1px solid #d4d2d0;*/
+}
+.login-panel-header {
+	height: 151px;
+	border-top: 1px solid #279f9d;
+	border-bottom: 1px solid #279f9d;
+	background: url(../images/regAndLogin/panel-h-bg-login.jpg) no-repeat;
+}
+.login-panel-header-text {
+	bottom: 15px;
+	left: 90px;
+	color: #fff;
+}
+.panel-content-login {
+	height: auto;
+}
+.panel-form-login {
+	width: 270px;
+}
+.input-icon {
+	width: 34px;
+	height: 34px;
+	border: 1px solid #cccccc;
+	border-right: 0px;
+	background-position: center !important;
+}
+.panel-form-login .input-item-wrap {
+	width: 235px;
+}
+.panel-form-login .input-text {
+	width: 213px;
+	border: 1px solid #cccccc;
+}
+.input-icon-user {
+	background: url(../images/regAndLogin/icon-user.png) no-repeat;
+}
+.input-icon-lock {
+	background: url(../images/regAndLogin/icon-lock.png) no-repeat;
+}
+.login-input-row-btn {
+	padding-top: 15px;
+	margin-bottom: 20px;
+}
+#login-step1-submit {
+	width: 268px;
+}
+#checkbox-remember-userName {
+	margin-right: 5px;
+}
+#panel-content-loginStep2 {
+	padding-top: 30px;
+}
+.login-selectCompany {
+	width: 270px;
+	overflow: auto;
+}
+.login-selectCompany-title {
+	color: #666666;
+	margin-bottom: 12px;
+}
+.login-selectCompany-list li {
+	margin-bottom: 15px;
+}
+.login-selectCompany-list li a {
+	display: block;
+	height: 65px;
+	padding: 0px 15px;
+	border: 1px solid #2bbfbd;
+	background: #60cfce;
+	color: #fff;
+}
+.login-selectCompany-list li a:hover {
+	/*border-color: #fa6373;*/
+	background: #20b3b1;
+}
+.company-name {
+	margin-top: 10px;
+}
+.company-numOfPeople {
+	margin-top: 8px;
+}
+/*登录结束*/
+
+/*找回密码*/
+.panel-header-findPw {
+	padding-left: 45px;
+}
+.panel-form-findPw {
+	margin-top: 125px;
+}
+/*找回密码结束*/
+
+/*邀请*/
+#invite-join-msg-index {
+	margin-top: 65px;
+}
+.invite-selectType {
+	width: 300px;
+	margin-top: 45px;
+}
+.invite-selectType li {
+	margin-bottom: 15px;
+}
+.invite-selectType a {
+	display: table-cell;
+	width: 298px;
+	height: 68px;
+	vertical-align: middle;
+	border: 1px solid #2bbfbd;
+  	background: #60cfce;
+  	color: #fff;
+  	line-height: 22px;
+}
+.invite-selectType a:hover {
+	border-color: #fa6373;
+	background: #f6838f;
+}
+
+.main-panel-header-invite {
+	padding-left: 45px;
+}
+#invite-noAccount-step-1, #invite-hasAccount-step-1 {
+	background: url(../images/regAndLogin/invite-step-1.png) no-repeat;
+}
+.main-panel-step-invite #step-item-2 {
+	margin-left: 240px;
+}
+.main-panel-step-invite #step-item-3 {
+	margin-left: 248px;
+}
+.invite-join-msg {
+	margin-top: 35px;
+	margin-left: 165px;
+	color: #363636;
+}
+.invite-from {
+	margin-right: 8px;
+}
+.invite-to-company {
+	margin-left: 8px;
+}
+.panel-form-invite {
+	margin-top: 20px;
+	/*overflow: hidden;*/
+}
+
+#invite-noAccount-step-2, #invite-hasAccount-step-2 {
+	background: url(../images/regAndLogin/invite-step-2.png) no-repeat;
+}
+#invite-noAccount-step-3, #invite-hasAccount-step-3 {
+	background: url(../images/regAndLogin/invite-step-3.png) no-repeat;
+}
+
+.invite-hasAccount-step #step-item-1 {
+	margin-left: 13px;
+}
+.invite-hasAccount-step #step-item-2 {
+	margin-left: 250px;
+}
+.invite-hasAccount-step #step-item-3 {
+	margin-left: 248px;
+}
+.invite-hasAccount-msg {
+	margin-left: 165px;
+	margin-top: 5px;
+}
+/*邀请结束*/
+/*新增左侧登录图片*/
+.login-bg-wrap{
+	width: 620px;
+	height: 620px;
+	float:left;
+	background: url(../images/regAndLogin/login-right-bg.png) no-repeat center 90px;
+}
+.login-bg-wrap:hover .text-title{
+	color:#A5481C;
+}
+.loin-bg-text{
+	font-family: Arial,Microsoft YaHei;
+	color: #fff;
+	width: 230px;
+	text-align: right;
+	top:254px;
+	right:0px;
+}
+.text-title{
+	font-size: 28px;
+}
+.text-subtitle{
+	font-size: 21px;
+}

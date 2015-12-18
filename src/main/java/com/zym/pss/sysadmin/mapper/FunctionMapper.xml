@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zym.pss.sysadmin.mapper.FunctionMapper">
+	<resultMap id="FunctionRM" type="Function">
+		 <id property="id" column="FUNCTION_ID"/>
+		
+		<result property="functionNo" column="Function_NO"/>
+		<result property="functionURL" column="FUNCTION_URL"/>
+		<result property="functionName" column="FUNCTION_NAME"/>
+		<result property="description" column="DESCRIPTION"/>
+	</resultMap>
+	
+	<!-- VO类ResultMap -->
+	<resultMap id="FunctionVORM" type="FunctionVO" extends="FunctionRM">
+		<association property="pricePolicy" javaType="PricePolicy">
+			<id property="id" column="PRICEPOLICY_ID"/>
+			<result property="pricepolicyNo" column="PRICEPOLICY_NO"/>
+			
+			<result property="functionNo" column="FUNCTION_NO"/>
+			<result property="functionName" column="FUNCTION_NAME"/>
+			
+			<result property="unit" column="UNIT"/>
+			<result property="price" column="PRICE"/>
+		</association>
+	</resultMap>
+	
+	<!-- 查询列表 -->
+	<select id="find" parameterType="map" resultMap="FunctionRM">
+		select * from FUNCTION_C
+	</select>
+	
+	<!-- 查询VO -->
+	<select id="findVO" parameterType="map" resultMap="FunctionVORM">
+		select *
+		from function_c f
+		left join
+		(
+		     select * from pricepolicy_c
+		) p
+		on f.function_no = p.function_no
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="findPage" parameterType="map" resultMap="FunctionRM">
+		select * from FUNCTION_C
+	</select>
+	
+	<!-- 获取单个信息 -->
+	<select id="get" parameterType="string" resultMap="FunctionRM">
+		select * from FUNCTION_C 
+		where FUNCTION_ID = #{pid}	
+	</select>
+	<!-- 添加信息 -->
+	<insert id="insert" parameterType="Function">
+		insert into FUNCTION_C 
+		(FUNCTION_ID,FUNCTION_NO,FUNCTION_URL,FUNCTION_NAME,DESCRIPTION)
+		values
+		(
+			#{id , jdbcType = VARCHAR},
+			#{functionNo , jdbcType = VARCHAR},
+			#{functionURL , jdbcType = VARCHAR},
+			#{functionName , jdbcType = VARCHAR},
+			#{description , jdbcType = VARCHAR}
+		)
+	</insert>
+	<!-- 修改信息 -->
+	<update id="update" parameterType="Function">
+		update FUNCTION_C
+		<set>
+			<if test="functionNo != null"> Function_NO = #{functionNo},</if>
+			<if test="functionURL != null"> Function_URL = #{functionURL},</if>
+			<if test="functionName != null"> Function_NAME = #{functionName},</if>
+			<if test="description != null">DESCRIPTION = #{description},</if>
+		</set>
+		where FUNCTION_ID = #{id}
+	</update>
+	<!-- 删除单个-->
+	<delete id="deleteById" parameterType="string">
+		delete from FUNCTION_C 
+		where FUNCTION_ID = #{pid}
+	</delete>
+		<!-- 批量删除 -->
+	<delete id="delete" parameterType="string">
+		delete from FUNCTION_C 
+		where FUNCTION_ID in
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>
